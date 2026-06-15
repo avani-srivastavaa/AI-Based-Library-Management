@@ -323,7 +323,7 @@ http://localhost:5173
 ## 👥 Team Members
 
 * Sumit Roy
-* Avani Shrivastava
+* Avani Srivastava
 * Parth Patil
 * Sarth Patil
 * Veena Patil
