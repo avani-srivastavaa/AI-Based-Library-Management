@@ -1,4 +1,5 @@
-const BASE_URL = "http://127.0.0.1:8000";
+export const BASE_URL = import.meta.env.VITE_BACKEND_URL || "http://127.0.0.1:8000";
+export const WS_URL = import.meta.env.VITE_WS_URL || "ws://127.0.0.1:8000";
 
 // Google Firebase Login
 export async function loginWithGoogle(idToken: string) {

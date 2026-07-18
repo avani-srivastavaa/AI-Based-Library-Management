@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router';
-import { getAdminBorrowRecords, getAdminStudents, getStudentBorrowDetails, addBook, updateBookCopies, deleteBook, getBooks } from '../data/api';
+import { getAdminBorrowRecords, getAdminStudents, getStudentBorrowDetails, addBook, updateBookCopies, deleteBook, getBooks, BASE_URL, WS_URL } from '../data/api';
 import {
   Shield,
   LayoutDashboard,
@@ -135,7 +135,7 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     // Connect WebSocket
-    const socket = new WebSocket(`ws://localhost:8000/ws/borrow/admin/admin`);
+    const socket = new WebSocket(`${WS_URL}/ws/borrow/admin/admin`);
     socket.onmessage = (event) => {
       const data = JSON.parse(event.data);
       if (data.type === 'borrow_request_admin' || data.type === 'return_request_admin') {
@@ -170,7 +170,7 @@ export default function AdminDashboard() {
 
   const fetchAnalytics = async () => {
     try {
-      const response = await fetch("http://localhost:8000/analytics");
+      const response = await fetch(`${BASE_URL}/analytics`);
       const json = await response.json();
       setAnalyticsData(json);
     } catch (error) {
@@ -186,7 +186,7 @@ export default function AdminDashboard() {
 
   const fetchRecentActivity = async () => {
     try {
-      const response = await fetch("http://localhost:8000/recent-activity?limit=6");
+      const response = await fetch(`${BASE_URL}/recent-activity?limit=6`);
       const json = await response.json();
       if (json.success && json.activities) {
         setRecentActivities(json.activities);
