@@ -34,7 +34,7 @@ import { Input } from '../components/ui/input';
 import { Badge } from '../components/ui/badge';
 import { mockBooks } from '../data/mockData';
 import { ThemeToggle } from '../components/theme/ThemeToggle';
-import { getUserActiveBorrows, getUserBorrowHistory, updateUserProfile, completeGoogleProfile, getBooks, submitReview, sendChatMessage, initChatbot } from '../data/api';
+import { getUserActiveBorrows, getUserBorrowHistory, updateUserProfile, completeGoogleProfile, getBooks, submitReview, sendChatMessage, initChatbot, WS_URL } from '../data/api';
 
 // ─── History record type ──────────────────────────────────────────────────────
 type HistoryRecord = {
@@ -242,7 +242,7 @@ export default function StudentDashboard() {
       });
 
       // Connect WebSocket
-      const socket = new WebSocket(`ws://localhost:8000/ws/borrow/student/${user.admission_number}`);
+      const socket = new WebSocket(`${WS_URL}/ws/borrow/student/${user.admission_number}`);
       socket.onmessage = (event) => {
         const data = JSON.parse(event.data);
         console.log("📩 WS message received:", data);

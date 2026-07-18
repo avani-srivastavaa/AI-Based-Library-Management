@@ -1,7 +1,13 @@
+import os
+from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-DATABASE_URL = "mysql+pymysql://root:root123@localhost/library_db"
+# Load environment variables from .env
+_env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..', '.env')
+load_dotenv(_env_path, override=True)
+
+DATABASE_URL = os.getenv("DATABASE_URL", "mysql+pymysql://root:root123@localhost/library_db")
 
 engine = create_engine(DATABASE_URL)
 
